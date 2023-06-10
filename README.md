@@ -1,6 +1,6 @@
 # Quick Notify
 
-![](Image/Playstore 1024x500 px.jpg)
+![](Image/Playstore1024x500px.jpg)
 
 In the recent era of smart society, search is essential word of smartphone. Getting information at anytime, anyplace is becoming common these days. Quick helps you to search more easily and efficiently.
 
