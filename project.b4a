@@ -1,0 +1,270 @@
+﻿Build1=Paid,com.clenontec.quick,Full
+File1=help_layout.bal
+File2=main_layout.bal
+File3=notify_layout.bal
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+Group=Default Group
+IconFile=
+Library1=core
+Library2=phone
+ManifestCode=AddManifestText(~\n~<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="29"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)
+Module1=notify_module
+Module2=help_module
+Module3=Starter
+NumberOfFiles=3
+NumberOfLibraries=2
+NumberOfModules=3
+Version=9.3
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Quick
+	#VersionCode: 1
+	#VersionName: 1.0.0
+	#SupportedOrientations: Portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+	
+End Sub
+
+Sub Globals
+	Private Label_quicknotifiandsearch As Label
+	Private EditText_quicksearch As EditText
+	Private Label_quickadd1 As Label
+	Private Label_quickadd2 As Label
+	Private Spinner_quicksearch As Spinner
+	Private Panel_quicksearchandnotification As Panel
+	Private RadioButton_URL As RadioButton
+	Private RadioButton_quick As RadioButton
+	Private btn_search As Button
+	Private btn_notifications As Button
+	Private btn_help As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("main_layout")
+	
+	'Add Search Engines to Spinner
+	Spinner_quicksearch.Add("Google")
+	Spinner_quicksearch.Add("Yahoo")
+	Spinner_quicksearch.Add("Bing")
+	Spinner_quicksearch.Add("Duck Duck Go")
+	Spinner_quicksearch.Add("Yandex")
+	Spinner_quicksearch.Add("Baidu")
+	Spinner_quicksearch.Add("Wolfram Alpha")
+	Spinner_quicksearch.Add("Excite")
+	Spinner_quicksearch.Add("Lycos")
+	Spinner_quicksearch.Add("GigaBlast")
+	Spinner_quicksearch.Add("AOL")
+	Spinner_quicksearch.Add("WebCrawler")
+	Spinner_quicksearch.Add("Search Encrypt")
+	
+	If RadioButton_quick.Checked=True Then
+		Label_quickadd1.Enabled=False
+		Label_quickadd2.Enabled=False
+		Spinner_quicksearch.Enabled=True
+		EditText_quicksearch.Hint="Search Text"
+	Else
+		Label_quickadd1.Enabled=True
+		Label_quickadd2.Enabled=True
+		Spinner_quicksearch.Enabled=False
+		EditText_quicksearch.Hint="Type URL ( Ex: http://www.xxx.com )"
+	End If
+
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub RadioButton_URL_CheckedChange(Checked As Boolean)
+	Label_quickadd1.Enabled=True
+	Label_quickadd2.Enabled=True
+	Spinner_quicksearch.Enabled=False
+	EditText_quicksearch.Hint="Type URL ( Ex: http://www.xxx.com )"
+End Sub
+
+Sub RadioButton_quick_CheckedChange(Checked As Boolean)
+	Label_quickadd1.Enabled=False
+	Label_quickadd2.Enabled=False
+	Spinner_quicksearch.Enabled=True
+	EditText_quicksearch.Hint="Search Text"
+End Sub
+
+Sub Label_quickadd2_Click
+	EditText_quicksearch.Text=EditText_quicksearch.Text&".com"
+End Sub
+
+Sub Label_quickadd1_Click
+	EditText_quicksearch.Text=EditText_quicksearch.Text&"http://www."
+End Sub
+
+Sub btn_search_Click
+	Try
+		If RadioButton_quick.Checked=True Then
+			If Spinner_quicksearch.SelectedItem="Google" Then
+				Try
+					Private u1 As Intent
+					u1.Initialize(u1.ACTION_VIEW,"https://www.google.com/search?q="&EditText_quicksearch.Text)
+					StartActivity(u1)
+				Catch
+					Log(LastException)
+				End Try
+			Else
+				If Spinner_quicksearch.SelectedItem="Yahoo" Then
+					Try
+						Private u2 As Intent
+						u2.Initialize(u2.ACTION_VIEW,"https://www.yahoo.com/search?q="&EditText_quicksearch.Text)
+						StartActivity(u2)
+					Catch
+						Log(LastException)
+					End Try
+				Else
+					If Spinner_quicksearch.SelectedItem="Bing" Then
+						Try
+							Private u3 As Intent
+							u3.Initialize(u3.ACTION_VIEW,"https://www.bing.com/search?q="&EditText_quicksearch.Text)
+							StartActivity(u3)
+						Catch
+							Log(LastException)
+						End Try
+					Else
+						If Spinner_quicksearch.SelectedItem="Duck Duck Go" Then
+							Try
+								Private u4 As Intent
+								u4.Initialize(u4.ACTION_VIEW,"https://www.duckduckgo.com/search?q="&EditText_quicksearch.Text)
+								StartActivity(u4)
+							Catch
+								Log(LastException)
+							End Try
+						Else
+							If Spinner_quicksearch.SelectedItem="Yandex" Then
+								Try
+									Private u5 As Intent
+									u5.Initialize(u5.ACTION_VIEW,"https://www.yandex.com/search/touch/?text="&EditText_quicksearch.Text)
+									StartActivity(u5)
+								Catch
+									Log(LastException)
+								End Try
+							Else
+								If Spinner_quicksearch.SelectedItem="Baidu" Then
+									Try
+										Private u6 As Intent
+										u6.Initialize(u6.ACTION_VIEW,"https://www.baidu.com/s?word="&EditText_quicksearch.Text)
+										StartActivity(u6)
+									Catch
+										Log(LastException)
+									End Try
+								Else
+									If Spinner_quicksearch.SelectedItem="Wolfram Alpha" Then
+										Try
+											Private u7 As Intent
+											u7.Initialize(u7.ACTION_VIEW,"https://www.wolframalpha.com/input/?="&EditText_quicksearch.Text)
+											StartActivity(u7)
+										Catch
+											Log(LastException)
+										End Try
+									Else
+										If Spinner_quicksearch.SelectedItem="Excite" Then
+											Try
+												Private u8 As Intent
+												u8.Initialize(u8.ACTION_VIEW,"https://www.results.excite.com/serp?q="&EditText_quicksearch.Text)
+												StartActivity(u8)
+											Catch
+												Log(LastException)
+											End Try
+										Else
+											If Spinner_quicksearch.SelectedItem="Lycos" Then
+												Try
+													Private u9 As Intent
+													u9.Initialize(u9.ACTION_VIEW,"https://www.search.lycos.com/web?q="&EditText_quicksearch.Text)
+													StartActivity(u9)
+												Catch
+													Log(LastException)
+												End Try
+											Else
+												If Spinner_quicksearch.SelectedItem="GigaBlast" Then
+													Try
+														Private u10 As Intent
+														u10.Initialize(u10.ACTION_VIEW,"https://www.gigablast.com/search?c=main&qlangcountry=en-us&q="&EditText_quicksearch.Text)
+														StartActivity(u10)
+													Catch
+														Log(LastException)
+													End Try
+												Else
+													If Spinner_quicksearch.SelectedItem="AOL" Then
+														Try
+															Private u11 As Intent
+															u11.Initialize(u11.ACTION_VIEW,"https://www.search.aol.com/aol/search?s_chn=prt_bon-mobile&q="&EditText_quicksearch.Text)
+															StartActivity(u11)
+														Catch
+															Log(LastException)
+														End Try
+													Else
+														If Spinner_quicksearch.SelectedItem="WebCrawler" Then
+															Try
+																Private u12 As Intent
+																u12.Initialize(u12.ACTION_VIEW,"https://www.webcrawler.com/serp?q="&EditText_quicksearch.Text)
+																StartActivity(u12)
+															Catch
+																Log(LastException)
+															End Try
+														Else
+															If Spinner_quicksearch.SelectedItem="Search Encrypt" Then
+																Try
+																	Private u13 As Intent
+																	u13.Initialize(u13.ACTION_VIEW,"https://www.searchencrypt.com/search?eq="&EditText_quicksearch.Text)
+																	StartActivity(u13)
+																Catch
+																	Log(LastException)
+																End Try
+															End If
+														End If
+													End If
+												End If
+											End If
+										End If
+									End If
+								End If
+							End If
+						End If
+					End If
+				End If
+			End If
+		Else
+			
+			Try
+				Private uxx As Intent
+				uxx.Initialize(u1.ACTION_VIEW,EditText_quicksearch.Text)
+				StartActivity(uxx)
+			Catch
+				Log(LastException)
+			End Try
+		End If
+	
+	Catch
+		Log(LastException)
+	End Try
+End Sub
+
+
+'Notification Module Active
+Sub btn_notifications_Click
+	StartActivity(notify_module)
+End Sub
+
+Sub btn_help_Click
+	StartActivity(help_module)
+End Sub
